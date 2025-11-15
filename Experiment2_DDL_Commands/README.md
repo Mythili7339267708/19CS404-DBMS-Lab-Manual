@@ -105,123 +105,231 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should set NULL on updates and deletes.
+item_desc and rate should not accept NULL.
 
-```sql
--- Paste your SQL code below for Question 1
+```
+CREATE TABLE item(
+item_id TEXT primary key,
+item_desc TEXT not null,
+rate INTEGER not null,
+icom_id TEXT CHECK(length(icom_id)=4),
+FOREIGN KEY (icom_id)
+ REFERENCES company(com_id)
+ ON UPDATE SET null
+ ON DELETE SET null);
+
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1263" height="324" alt="image" src="https://github.com/user-attachments/assets/603ab505-778d-4ee0-b699-25ccb3a185cd" />
+
 
 **Question 2**
----
--- Paste Question 2 here
+--
+Insert all books from Out_of_print_books into Books
 
-```sql
--- Paste your SQL code below for Question 2
+Table attributes are ISBN, Title, Author, Publisher, YearPublished
+
+```
+INSERT INTO Books(ISBN, Title,Author, Publisher, YearPublished)
+SELECT ISBN, Title,Author, Publisher, YearPublished
+FROM Out_of_print_books;
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+
+<img width="1132" height="207" alt="image" src="https://github.com/user-attachments/assets/1084b5a9-ef7b-4cbd-ac9e-5e766bf75c2d" />
+
 
 **Question 3**
----
--- Paste Question 3 here
+--
+Create a table named Products with the following constraints:
 
-```sql
--- Paste your SQL code below for Question 3
+ProductID should be the primary key.
+ProductName should be NOT NULL.
+Price is of real datatype and should be greater than 0.
+Stock is of integer datatype and should be greater than or equal to 0.
+
+```
+CREATE TABLE Products(
+ProductID primary key,
+ProductName TEXT not null,
+Price REAL CHECK(Price>0),
+Stock INTEGER CHECK(Stock>=0));
 ```
 
 **Output:**
 
-![Output3](output.png)
+
+<img width="1362" height="309" alt="image" src="https://github.com/user-attachments/assets/4dd01eac-d418-43e8-b4a4-a6036277fe21" />
+
 
 **Question 4**
----
--- Paste Question 4 here
+--
+Create a table named Reviews with the following columns:
 
-```sql
--- Paste your SQL code below for Question 4
+ReviewID as INTEGER
+ProductID as INTEGER
+Rating as REAL
+ReviewText as TEXT
+
+```
+CREATE TABLE Reviews(
+ReviewID INTEGER,
+ProductID INTEGER,
+Rating REAL,
+ReviewText TEXT);
 ```
 
 **Output:**
 
-![Output4](output.png)
+
+<img width="1491" height="327" alt="image" src="https://github.com/user-attachments/assets/7186e6e4-3597-4656-90a6-462dc405e28c" />
+
 
 **Question 5**
----
--- Paste Question 5 here
+--
+Write a SQL query to Rename the "city" column to "location" in the "customer" table.
 
-```sql
--- Paste your SQL code below for Question 5
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
+ 
+
+```
+ALTER TABLE customer
+RENAME COLUMN city TO location;
 ```
 
 **Output:**
 
-![Output5](output.png)
+
+<img width="1583" height="286" alt="image" src="https://github.com/user-attachments/assets/c2a09b46-9ea6-45f7-94dd-359872a14651" />
+
 
 **Question 6**
----
--- Paste Question 6 here
+--
+Create a table named ProjectAssignments with the following constraints:
+AssignmentID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+ProjectID as INTEGER should be a foreign key referencing Projects(ProjectID).
+AssignmentDate as DATE should be NOT NULL.
 
-```sql
--- Paste your SQL code below for Question 6
+```
+CREATE TABLE ProjectAssignments(
+AssignmentID INTEGER primary key,
+EmployeeID INTEGER,
+ProjectID INTEGER,
+AssignmentDate DATE not null,
+FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID));
 ```
 
 **Output:**
 
-![Output6](output.png)
+
+<img width="1587" height="235" alt="image" src="https://github.com/user-attachments/assets/af81c7bd-76ed-4f73-b104-85458abc4aa3" />
+
 
 **Question 7**
----
--- Paste Question 7 here
+--
+Insert a new product with ProductID 101, Name Laptop, Category Electronics, Price 1500, and Stock 50 into the Products table.
 
-```sql
--- Paste your SQL code below for Question 7
+```
+INSERT INTO Products(ProductID, Name, Category, Price, Stock)
+VALUES (101, 'Laptop', 'Electronics', 1500, 50);
 ```
 
 **Output:**
 
-![Output7](output.png)
+
+<img width="1223" height="213" alt="image" src="https://github.com/user-attachments/assets/a80b30a0-11f1-4d95-9012-ad6cc4c3d72f" />
+
 
 **Question 8**
----
--- Paste Question 8 here
+--
+In the Products table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
 
-```sql
--- Paste your SQL code below for Question 8
+ProductID   Name              Category    Price       Stock
+----------  ---------------   ----------  ----------  ----------
+106         Fitness Tracker   Wearables
+107         Laptop            Electronics  999.99      50
+108         Wireless Earbuds  Accessories              100
+
+```
+INSERT INTO Products(ProductID, Name, Category, Price, Stock)
+VALUES 
+ (106, 'Fitness Tracker', 'Wearables', NULL, NULL),
+ (107, 'Laptop', 'Electronic', 999.99, 50),
+ (108, 'Wireless Earbud', 'Accessorie', NULL, 100);
 ```
 
 **Output:**
 
-![Output8](output.png)
+
+<img width="1181" height="243" alt="image" src="https://github.com/user-attachments/assets/1cbf2057-972f-470b-9991-d3072e29ae8d" />
+
 
 **Question 9**
----
--- Paste Question 9 here
+--
+Create a new table named contacts with the following specifications:
+contact_id as INTEGER and primary key.
+first_name as TEXT and not NULL.
+last_name as TEXT and not NULL.
+email as TEXT.
+phone as TEXT and not NULL with a check constraint to ensure the length of phone is at least 10 characters.
 
-```sql
--- Paste your SQL code below for Question 9
+```
+CREATE TABLE contacts(
+contact_id INTEGER primary key,
+first_name TEXT not null,
+last_name TEXT not null,
+email TEXT,
+phone TEXT not null CHECK(length(phone)>=10));
 ```
 
 **Output:**
 
-![Output9](output.png)
+
+<img width="1287" height="190" alt="image" src="https://github.com/user-attachments/assets/b896ed5e-348f-42a9-8522-62b1846d057e" />
+
 
 **Question 10**
----
--- Paste Question 10 here
+--
+Write a SQL Query  to Rename attribute "name" to "first_name"  and add mobilenumber as number ,DOB as Date,State as varchar(30) in the table Companies.
 
-```sql
--- Paste your SQL code below for Question 10
+```
+ALTER TABLE Companies
+RENAME COLUMN name TO first_name;
+
+ALTER TABLE Companies
+ADD COLUMN mobilenumber number;
+ALTER TABLE Companies
+ADD COLUMN DOB Date;
+ALTER TABLE Companies
+ADD COLUMN State varchar(30);
+
 ```
 
 **Output:**
 
-![Output10](output.png)
+
+<img width="1292" height="332" alt="image" src="https://github.com/user-attachments/assets/9046da0c-0be6-489f-90e9-9ad0466e5bc6" />
+
 
 
 ## RESULT
