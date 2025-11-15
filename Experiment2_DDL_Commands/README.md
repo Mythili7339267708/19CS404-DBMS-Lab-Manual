@@ -100,7 +100,7 @@ CREATE TABLE Table_Name (
   col_name1 data_type,
   col_name2 data_type,
   col_name3 data_type DEFAULT 'default_value'
-);
+);bb
 ```
 
 **Question 1**
